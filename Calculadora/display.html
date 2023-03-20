@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora usando JS</title>
+    <link rel="stylesheet" href="display.css" type="text/css">
+</head>
+    <script>
+
+    </script>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class = "display">
+                    <input type= "text" name = "display">
+                </div>
+                <div>
+                    <input type="button", value = "DP6" >
+                    <input type="button", value = "DE" class = 'clean'>
+                    <input type="button", value = "AC" class = 'cleanall'> 
+                    <input type="button", value = "/" class = 'ops'>  
+                <div>
+                    <input type="button", value = "7" class = 'num'> 
+                    <input type="button", value = "8" class = 'num'> 
+                    <input type="button", value = "9" class = 'num'> 
+                    <input type="button", value = "x" class = 'ops'> 
+                </div>
+                <div>
+                    <input type="button", value = "4" class = 'num'> 
+                    <input type="button", value = "5" class = 'num'> 
+                    <input type="button", value = "6" class = 'num'> 
+                    <input type="button", value = "-" class = 'ops'> 
+                </div>
+                <div>
+                    <input type="button", value = "3" class = 'num'> 
+                    <input type="button", value = "2" class = 'num'> 
+                    <input type="button", value = "1" class = 'num'> 
+                    <input type="button", value = "+" class = 'ops'>
+                </div>
+                <div>
+                    <input type="button", value = "0" class = 'num'> 
+                    <input type="button", value = "." class = 'ops'> 
+                    <input type="button", value = "=" class = 'igual'> 
+                     
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script>
+        function display(e){
+            console.log(e)
+            var n = e.target.value;
+            var display = document.querySelector('input[name = "display"]')
+
+            const conditions = [
+                display.value.slice(-1) != '0',
+                display.value.slice(-1) != '1',
+                display.value.slice(-1) != '2',
+                display.value.slice(-1) != '3',
+                display.value.slice(-1) != '4',
+                display.value.slice(-1) != '5',
+                display.value.slice(-1) != '6',
+                display.value.slice(-1) != '7',
+                display.value.slice(-1) != '8',
+                display.value.slice(-1) != '9',
+            ]
+
+            console.log(display.value)
+            if (e.target.className =="ops" && (!conditions.includes(false))){
+                 window.alert('Só é possível utilizar esse operador uma vez');
+            } else{
+                if (display.value == '0'){
+                    display.value =  n
+                }
+                else{
+                    console.log(e.target.className)
+                    display.value = display.value + n
+                }
+                
+            }
+
+
+        }
+        function igual(e){
+        
+            var display = document.querySelector('input[name = "display"]')
+            display.value = eval(display.value.replace('x', '*'))
+
+        }
+        function clean(e){
+            var display = document.querySelector('input[name = "display"]')
+            display.value = display.value.slice(0, -1)
+
+        }
+        function cleanAll(e){
+            var display = document.querySelector('input[name = "display"]')
+            display.value = ''
+        }
+        
+
+
+
+       document.querySelectorAll('.num, .ops').forEach(element => element.addEventListener('click', display))
+       document.querySelectorAll('.igual').forEach(element => element.addEventListener('click', igual))
+       document.querySelectorAll('.clean').forEach(element => element.addEventListener('click', clean))
+       document.querySelectorAll('.cleanall').forEach(element => element.addEventListener('click', cleanAll))
+
+    </script>
+</body>
+</html>
